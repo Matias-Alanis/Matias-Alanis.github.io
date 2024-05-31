@@ -58,7 +58,6 @@ body {
             color: #ffffff;
             font-weight: 700;
             font-size: 1.2rem;
-
             &:hover {
                 animation: tilt-n-move-shaking 0.25s infinite;
             }
