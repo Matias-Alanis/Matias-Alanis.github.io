@@ -6,9 +6,25 @@ const options = {
     method: 'GET', // Método de la petición (GET)
     headers: {
         accept: 'application/json', // Tipo de respuesta esperada (JSON)
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYTJjYTAwZDYxZWIzOTEyYjZlNzc4MDA4YWQ3ZmNjOCIsInN1YiI6IjYyODJmNmYwMTQ5NTY1MDA2NmI1NjlhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4MJSPDJhhpbHHJyNYBtH_uCZh4o0e3xGhZpcBIDy-Y8'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzMwNmU3N2FlYjgyZGI5YjA4MWQ4OWQwY2Q2NDYwNCIsInN1YiI6IjY2NWEzYzU3NDMzMmRjNmViZTMzMDU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1qMUaoYnbDLZxA8dy2orRQ5KubtEuaTVqknbNmppKDM'
         
     }
+};
+// Función para crear elementos HTML
+const createElement = (tag, className, attributes = {}) => {
+    // Creamos un nuevo elemento HTML del tipo especificado (tag)
+    const element = document.createElement(tag);
+    
+    // Si se especificó una clase, la añadimos al elemento
+    if (className) {
+        element.classList.add(className);
+    }
+    
+    // Iteramos sobre los atributos pasados como argumento y los añadimos al elemento
+    Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+    
+    // Devolvemos el elemento creado
+    return element;
 };
 
 // funcion para cargar pelis en tendencias
@@ -20,7 +36,7 @@ const cargarPeliculasTendencia = async(page = 1)=>{
     console.log(movies);
     const tendenciasContainer = document.querySelector('.peliculasTendencia .peliculas');
     tendenciasContainer.innerHTML = '';
-    
+
     movies.forEach(movie => {
         // ancla
         const ancla = document.createElement('a');

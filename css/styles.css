@@ -80,7 +80,7 @@ body {
                     transition: transform 0.3s, box-shadow 0.3s;
 
                     &:hover {
-                        trnasform: scale(0.95);
+                        transform: scale(0.95);
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
                         border-radius: 5px;
                     }
