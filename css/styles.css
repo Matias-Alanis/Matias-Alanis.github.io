@@ -316,7 +316,7 @@ hr{
 
 @media (max-width: 768px) {
     .main{
-        .sectionPrincipal{
+        .seccionPrincipal{
             height: 60vh;
             .tituloPrincipal{
                 font-size: 2.5rem;
