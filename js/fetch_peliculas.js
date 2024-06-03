@@ -1,3 +1,8 @@
+const botonAnterior = document.getElementById("botonAnterior");
+const botonSiguiente = document.getElementById("botonSiguiente");
+const seccionTendencias = document.getElementById("tendencias");
+
+
 // Opciones para las peticiones fetch a la API
 const options = {
     method: 'GET', // Método de la petición (GET)
@@ -70,14 +75,14 @@ const cargarPeliculasTendencia = async(page = 1)=>{
     //actualizar el data page con la pagina actual
     tendenciasContainer.parentElement.setAttribute('data-page', page);
 };
-/*
+
 //funcion para cargar pelis aclamadas
 const cargarPeliculasAclamadas = async () => {
     // petición fetch a la API para obtener las pelís aclamadas
-    const response = await fetch(`${API_SERVER}/movie/top_rated`, options);
+    const response = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=c7306e77aeb82db9b081d89d0cd64604");
     const data = await response.json();
     const movies = data.results; 
-    const aclamadasContainer = document.querySelector('.aclamadas'); 
+    const aclamadasContainer = document.querySelector('.peliculasAclamadas'); 
 
     movies.forEach(movie => {
         //  div peliculaItem
@@ -94,10 +99,17 @@ const cargarPeliculasAclamadas = async () => {
         aclamadasContainer.appendChild(peliculaItem);
     });
 };
+// Ejecutamos las funciones de carga de películas al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    cargarPeliculasTendencia();
+    cargarPeliculasAclamadas();
+});
 
-const botonAnterior = document.getElementById('botonAnterior');
-const botonSiguiente = document.getElementById('botonSiguiente');
-const seccionTendencias = document.getElementById('tendencias');
+// Event listener para el botón "Siguiente"
+botonSiguiente.addEventListener('click', () => {
+    let currentPage = Number(seccionTendencias.getAttribute('data-page'));
+    cargarPeliculasTendencia(currentPage + 1);
+});
 
 // Event listener para el botón "Anterior"
 botonAnterior.addEventListener('click', () => {
@@ -106,15 +118,5 @@ botonAnterior.addEventListener('click', () => {
     cargarPeliculasTendencia(currentPage - 1);
 });
 
-// Event listener para el botón "Siguiente"
-botonSiguiente.addEventListener('click', () => {
-    let currentPage = Number(seccionTendencias.getAttribute('data-page'));
-    cargarPeliculasTendencia(currentPage + 1);
-});
-*/
 
-// Ejecutamos las funciones de carga de películas al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    cargarPeliculasTendencia();
-    cargarPeliculasAclamadas();
-});
+

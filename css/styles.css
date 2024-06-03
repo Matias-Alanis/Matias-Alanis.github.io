@@ -155,7 +155,7 @@ body {
 
 /*Estilos MAIN escritorio*/
 .main {
-    .seccionPrincipal {
+    .seccionPrincipal{
         color: white;
         background: linear-gradient(to right top, #0000008a, #0000008a), url(../assets/img/banner-bg.jpg);
         background-size: cover;
@@ -167,7 +167,7 @@ body {
         align-items: center;
         text-align: center;
 
-        .tituloPrincipal {
+        .tituloPrincipal{
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 1rem;
@@ -251,7 +251,6 @@ body {
                 }
             }
         }
-
     }
 
     .peliculasTendencia {
@@ -259,8 +258,7 @@ body {
         margin: 0 auto;
         text-align: center;
         margin-top: 10px;
-
-        .tituloSection {
+        .tituloSection{
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 40px;
@@ -337,7 +335,7 @@ body {
 
         }
 
-        .boton {
+        .boton{
             border: 1px solid white;
             box-sizing: content-box;
             margin-top: 50px;
@@ -351,8 +349,7 @@ body {
             text-decoration: none;
             margin-bottom: 60px;
             transition: transform 0.3s, box-shadow 0.3s;
-
-            &:hover {
+            &:hover{
                 background-color: #9f3647;
                 transform: scale(0.95);
                 box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
@@ -367,14 +364,12 @@ body {
         text-align: center;
         margin-top: 10px;
         margin-bottom: 60px;
-
         .tituloSection {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 40px;
         }
-
-        .aclamadas {
+        .aclamadas{
             overflow-x: scroll;
             overflow-y: hidden;
             width: 100%;
@@ -383,7 +378,7 @@ body {
             align-items: flex-start;
             padding: 0px 0px 40px 0px;
 
-            .peliculaItem {
+            .peliculaItem{
                 border-radius: 25px;
                 width: 170px;
                 min-width: 170px;
@@ -394,7 +389,7 @@ body {
                 flex-direction: column;
                 justify-content: space-between;
 
-                .imgAclamada {
+                .imgAclamada{
                     border-radius: 5%;
                     width: 95%;
                     height: 95%;
