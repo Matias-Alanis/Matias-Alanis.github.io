@@ -1,6 +1,3 @@
-// Definimos la URL base de la API de The Movie DB
-const API_SERVER = 'https://api.themoviedb.org/3';
-
 // Opciones para las peticiones fetch a la API
 const options = {
     method: 'GET', // Método de la petición (GET)
@@ -10,6 +7,9 @@ const options = {
         
     }
 };
+var myStatus = Response.status;
+console.log(myStatus);
+
 // Función para crear elementos HTML
 const createElement = (tag, className, attributes = {}) => {
     // Creamos un nuevo elemento HTML del tipo especificado (tag)
@@ -30,7 +30,10 @@ const createElement = (tag, className, attributes = {}) => {
 // funcion para cargar pelis en tendencias
 const cargarPeliculasTendencia = async(page = 1)=>{
     //peticion fetch a la API para obtener pelis populares
-    const response = await fetch(`${API_SERVER}/movie/popular?page=${page}`, options);
+    const response = await fetch("https://api.themoviedb.org/3/movie/popular?api_key=c7306e77aeb82db9b081d89d0cd64604&language=es-MX&page=1");
+    console.log(response);
+
+
     const data = await response.json(); 
     const movies = data.results;
     console.log(movies);
@@ -50,6 +53,7 @@ const cargarPeliculasTendencia = async(page = 1)=>{
         img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
         img.alt = movie.title;
         img.loading = 'lazy';
+
         //  div tituloPelicula
         const tituloPelicula = document.createElement('div');
         tituloPelicula.classList.add('tituloPelicula');
@@ -66,7 +70,7 @@ const cargarPeliculasTendencia = async(page = 1)=>{
     //actualizar el data page con la pagina actual
     tendenciasContainer.parentElement.setAttribute('data-page', page);
 };
-
+/*
 //funcion para cargar pelis aclamadas
 const cargarPeliculasAclamadas = async () => {
     // petición fetch a la API para obtener las pelís aclamadas
@@ -79,7 +83,7 @@ const cargarPeliculasAclamadas = async () => {
         //  div peliculaItem
         const peliculaItem = document.createElement('div');
         peliculaItem.classList.add('peliculaItem');
-        imagen
+        // imagen
         const img = document.createElement('img');
         img.classList.add('imgAclamada');
         img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
@@ -107,6 +111,7 @@ botonSiguiente.addEventListener('click', () => {
     let currentPage = Number(seccionTendencias.getAttribute('data-page'));
     cargarPeliculasTendencia(currentPage + 1);
 });
+*/
 
 // Ejecutamos las funciones de carga de películas al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
