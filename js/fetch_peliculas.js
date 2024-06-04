@@ -9,7 +9,7 @@ const options = {
     headers: {
         accept: 'application/json', // Tipo de respuesta esperada (JSON)
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzMwNmU3N2FlYjgyZGI5YjA4MWQ4OWQwY2Q2NDYwNCIsInN1YiI6IjY2NWEzYzU3NDMzMmRjNmViZTMzMDU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1qMUaoYnbDLZxA8dy2orRQ5KubtEuaTVqknbNmppKDM'
-        
+
     }
 };
 var myStatus = Response.status;
@@ -19,27 +19,27 @@ console.log(myStatus);
 const createElement = (tag, className, attributes = {}) => {
     // Creamos un nuevo elemento HTML del tipo especificado (tag)
     const element = document.createElement(tag);
-    
+
     // Si se especificó una clase, la añadimos al elemento
     if (className) {
         element.classList.add(className);
     }
-    
+
     // Iteramos sobre los atributos pasados como argumento y los añadimos al elemento
     Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
-    
+
     // Devolvemos el elemento creado
     return element;
 };
 
 // funcion para cargar pelis en tendencias
-const cargarPeliculasTendencia = async(page = 1)=>{
+const cargarPeliculasTendencia = async (page = 1) => {
     //peticion fetch a la API para obtener pelis populares
     const response = await fetch("https://api.themoviedb.org/3/movie/popular?api_key=c7306e77aeb82db9b081d89d0cd64604&language=es-MX&page=1");
     console.log(response);
 
 
-    const data = await response.json(); 
+    const data = await response.json();
     const movies = data.results;
     console.log(movies);
     const tendenciasContainer = document.querySelector('.peliculasTendencia .peliculas');
@@ -79,15 +79,14 @@ const cargarPeliculasTendencia = async(page = 1)=>{
 //funcion para cargar pelis aclamadas
 const cargarPeliculasAclamadas = async () => {
     // petición fetch a la API para obtener las pelís aclamadas
-    const response = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=c7306e77aeb82db9b081d89d0cd64604");
+    const response = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=c7306e77aeb82db9b081d89d0cd64604&language=en-US");
     const data = await response.json();
-    const movies = data.results; 
-    const aclamadasContainer = document.querySelector('.peliculasAclamadas'); 
+    const movies = data.results;
+    const aclamadasContainer = document.querySelector('.aclamadas');
 
     movies.forEach(movie => {
         //  div peliculaItem
-        const peliculaItem = document.createElement('div');
-        peliculaItem.classList.add('peliculaItem');
+        const peliculaItem = createElement('div', 'peliculaItem');
         // imagen
         const img = document.createElement('img');
         img.classList.add('imgAclamada');
@@ -97,13 +96,10 @@ const cargarPeliculasAclamadas = async () => {
         // relaciono los elementos
         peliculaItem.appendChild(img);
         aclamadasContainer.appendChild(peliculaItem);
+        
     });
+
 };
-// Ejecutamos las funciones de carga de películas al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    cargarPeliculasTendencia();
-    cargarPeliculasAclamadas();
-});
 
 // Event listener para el botón "Siguiente"
 botonSiguiente.addEventListener('click', () => {
@@ -117,6 +113,10 @@ botonAnterior.addEventListener('click', () => {
     if (currentPage <= 1) return;
     cargarPeliculasTendencia(currentPage - 1);
 });
-
+// Ejecutamos las funciones de carga de películas al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    cargarPeliculasTendencia();
+    cargarPeliculasAclamadas();
+});
 
 
