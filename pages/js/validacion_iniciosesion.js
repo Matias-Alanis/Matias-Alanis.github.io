@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+
     const form = document.querySelector('form');
-    
     form.addEventListener('submit', (event) => {
         if (!validateForm()) {
             console.log('El formulario no es válido. Por favor, corrige los errores.');
@@ -11,25 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    
     const validateForm = () => {
         let isValid = true;
-        isValid = validateField('nombre', 'El nombre es obligatorio') && isValid;
-        isValid = validateField('apellido', 'El apellido es obligatorio') && isValid;
         isValid = validateEmailField('email', 'El correo electrónico no es válido') && isValid;
         isValid = validateField('password', 'La contraseña es obligatoria') && isValid;
-        isValid = validateField('fechaNacimiento', 'La fecha de nacimiento es obligatoria') && isValid;
-        isValid = validateField('pais', 'El país es obligatorio') && isValid;
-        const terminos = document.getElementById('terminos').checked;
-        if (!terminos) {
-            isValid = false;
-            setErrorFor(document.getElementById('terminos'), 'Debes aceptar los términos y condiciones');
-        } else {
-            setSuccessFor(document.getElementById('terminos'));
-        }
 
         return isValid;
     };
 
+    
     const validateField = (fieldId, errorMessage) => {
         const field = document.getElementById(fieldId);
         const value = field.value.trim();
@@ -42,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    
     const validateEmailField = (fieldId, errorMessage) => {
+
         const field = document.getElementById(fieldId);
         const email = field.value.trim();
         if (email === '') {
@@ -56,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return true;
         }
     };
+
 
     const setErrorFor = (input, message) => {
         const formControl = input.closest('div');
@@ -76,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     };
-      form.querySelectorAll('input').forEach(input => {
+
+    form.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', () => {
             const value = input.value.trim();
             if (value !== '') {
@@ -84,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-     
-     form.querySelectorAll('select').forEach(select => {
+
+    form.querySelectorAll('select').forEach(select => {
         select.addEventListener('change', () => {
             const value = select.value;
             if (value !== '') {
@@ -93,4 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+
 });
+
+
