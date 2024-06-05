@@ -1,8 +1,4 @@
-const botonAnterior = document.getElementById("botonAnterior");
-const botonSiguiente = document.getElementById("botonSiguiente");
-const seccionTendencias = document.getElementById("tendencias");
-
-
+const API_SERVER = "https://api.themoviedb.org/3";
 // Opciones para las peticiones fetch a la API
 const options = {
     method: 'GET', // Método de la petición (GET)
@@ -34,11 +30,11 @@ const createElement = (tag, className, attributes = {}) => {
 
 // funcion para cargar pelis en tendencias
 const cargarPeliculasTendencia = async (page = 1) => {
+    try{
+        const url = `${API_SERVER}/movie/popular?page=${page}`;
     //peticion fetch a la API para obtener pelis populares
-    const response = await fetch("https://api.themoviedb.org/3/movie/popular?api_key=c7306e77aeb82db9b081d89d0cd64604&language=es-MX&page=1");
+    const response = await fetch(`${API_SERVER}/movie/popular?page=${page}`,options);
     console.log(response);
-
-
     const data = await response.json();
     const movies = data.results;
     console.log(movies);
@@ -74,12 +70,16 @@ const cargarPeliculasTendencia = async (page = 1) => {
     });
     //actualizar el data page con la pagina actual
     tendenciasContainer.parentElement.setAttribute('data-page', page);
+    } catch(error){
+        console.error('There was a problem with the fetch operation:', error);
+    }
 };
 
 //funcion para cargar pelis aclamadas
 const cargarPeliculasAclamadas = async () => {
+    try{
     // petición fetch a la API para obtener las pelís aclamadas
-    const response = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=c7306e77aeb82db9b081d89d0cd64604&language=en-US");
+    const response = await fetch(`${API_SERVER}/movie/top_rated`, options);
     const data = await response.json();
     const movies = data.results;
     const aclamadasContainer = document.querySelector('.aclamadas');
@@ -98,20 +98,22 @@ const cargarPeliculasAclamadas = async () => {
         aclamadasContainer.appendChild(peliculaItem);
         
     });
+    } catch(error){
+        console.error('There was a problem with the fetch operation:', error);
+    }
 
 };
-
-// Event listener para el botón "Siguiente"
-botonSiguiente.addEventListener('click', () => {
-    let currentPage = Number(seccionTendencias.getAttribute('data-page'));
-    cargarPeliculasTendencia(currentPage + 1);
-});
-
 // Event listener para el botón "Anterior"
-botonAnterior.addEventListener('click', () => {
-    let currentPage = Number(seccionTendencias.getAttribute('data-page'));
+document.querySelector('.anterior').addEventListener('click', () => {
+    let currentPage = Number(document.querySelector('.peliculasTendencia').getAttribute('data-page'));
     if (currentPage <= 1) return;
     cargarPeliculasTendencia(currentPage - 1);
+});
+
+// Event listener para el botón "Siguiente"
+document.querySelector('.siguiente').addEventListener("click", () => {
+    let currentPage = Number(document.querySelector('.peliculasTendencia').getAttribute('data-page'));
+    cargarPeliculasTendencia(currentPage + 1);
 });
 // Ejecutamos las funciones de carga de películas al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
